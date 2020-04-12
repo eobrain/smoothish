@@ -9,7 +9,7 @@ test('flat line is unchanged by smoothing', t => {
   const ma = movingAverage(raw)
   const sq = movingLeastSquares(raw)
 
-  t.deepEqual(ma, raw)
+  t.deepEqual(ma, raw.slice(2, -2))
   t.deepEqual(sq, raw)
 })
 
@@ -19,7 +19,7 @@ test('straight line', t => {
   const ma = movingAverage(raw)
   const sq = movingLeastSquares(raw)
 
-  t.deepEqual(ma, [2, 2.5, 3, 4, 5, 6, 7, 8, 9, 10, 10.5, 11])
+  t.deepEqual(ma, raw.slice(2, -2))
   // Least squares smoothing has no effect
   t.deepEqual(sq, raw)
 })
@@ -30,16 +30,19 @@ test('missing point is filled in', t => {
   const ma = movingAverage(raw)
   const sq = movingLeastSquares(raw)
 
-  t.deepEqual(ma, [2, 2.5, 3, 3.5, 4.75, 6, 7.25, 8.5, 9, 10, 10.5, 11])
+  t.deepEqual(ma, [3, 3.5, 4.75, 6, 7.25, 8.5, 9, 10])
   t.deepEqual(sq, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
 })
 
 test('step function is smoothed', t => {
   const raw = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2]
+
   const ma = movingAverage(raw)
   const sq = movingLeastSquares(raw)
-  t.deepEqual(ma, [1, 1, 1, 1, 1.2, 1.4, 1.6, 1.8, 2, 2, 2, 2])
-  t.deepEqual(quantize(sq), [1, 1, 1, 1, 1.2, 1.4, 1.6, 1.8, 2, 2, 2, 2])
+
+  const expected = [1, 1, 1, 1, 1.2, 1.4, 1.6, 1.8, 2, 2, 2, 2]
+  t.deepEqual(ma, expected.slice(2, -2))
+  t.deepEqual(quantize(sq), expected)
 })
 
 test('zeros are handled correctly', t => {
@@ -48,8 +51,9 @@ test('zeros are handled correctly', t => {
   const ma = movingAverage(raw)
   const sq = movingLeastSquares(raw)
 
-  t.deepEqual(ma, [0, 0, 0, 0, 0.2, 0.4, 0.6, 0.8, 1, 1, 1, 1])
-  t.deepEqual(quantize(sq), [0, 0, 0, 0, 0.2, 0.4, 0.6, 0.8, 1, 1, 1, 1])
+  const expected = [0, 0, 0, 0, 0.2, 0.4, 0.6, 0.8, 1, 1, 1, 1]
+  t.deepEqual(ma, expected.slice(2, -2))
+  t.deepEqual(quantize(sq), expected)
 })
 
 test('an example for documentation', t => {
@@ -58,7 +62,7 @@ test('an example for documentation', t => {
   const ma = movingAverage(raw)
   const sq = movingLeastSquares(raw)
 
-  t.deepEqual(quantize(ma), [120, 120, 140, 190, 262.5, 475, 475, 566.667])
+  t.deepEqual(quantize(ma), [140, 190, 262.5, 475])
   t.deepEqual(quantize(sq), [95, 120, 146.571, 190, 247.143, 350, 600, 916.667])
 })
 

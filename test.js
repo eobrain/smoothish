@@ -105,3 +105,72 @@ test('An empty list is unchanged', t => {
   t.deepEqual(ma, [])
   t.deepEqual(sq, [])
 })
+
+test('impulse at r=2 (the default)', t => {
+  const raw = [
+    0, 0, 0, 0, 0, 0,
+    100,
+    0, 0, 0, 0, 0, 0]
+
+  const ma = movingAverage(raw, 2)
+  const sq = movingLeastSquares(raw, 2)
+
+  const expected = [
+    0, 0, 0, 0, 20, 20,
+    20,
+    20, 20, 0, 0, 0, 0]
+  t.deepEqual(ma, expected.slice(2, -2))
+  t.deepEqual(sq, expected)
+})
+
+test('impulse at r=1', t => {
+  const raw = [
+    0, 0, 0, 0, 0, 0,
+    100,
+    0, 0, 0, 0, 0, 0]
+
+  const ma = movingAverage(raw, 1)
+  const sq = movingLeastSquares(raw, 1)
+
+  const expected = [
+    0, 0, 0, 0, 0, 33.333,
+    33.333,
+    33.333, 0, 0, 0, 0, 0]
+  t.deepEqual(quantize(ma), expected.slice(1, -1))
+  t.deepEqual(quantize(sq), expected)
+})
+
+test('impulse at r=0 (no change)', t => {
+  const raw = [
+    0, 0, 0, 0, 0, 0,
+    100,
+    0, 0, 0, 0, 0, 0]
+
+  const ma = movingAverage(raw, 0)
+  const sq = movingLeastSquares(raw, 0)
+
+  t.deepEqual(ma, raw)
+  t.deepEqual(sq, raw)
+})
+
+test('negative r throws exception', t => {
+  const raw = [
+    0, 0, 0, 0, 0, 0,
+    100,
+    0, 0, 0, 0, 0, 0]
+
+  t.throws(() => movingAverage(raw, -1), { message: /negative radius/ })
+  t.throws(() => movingLeastSquares(raw, -1), { message: /negative radius/ })
+})
+
+test('null data throws an exception', t => {
+  t.throws(() => movingAverage(null), { message: /null data/ })
+  t.throws(() => movingLeastSquares(null), { message: /null data/ })
+})
+
+test('undefined data throws an exception', t => {
+  t.throws(() => movingAverage(), { message: /no data/ })
+  t.throws(() => movingAverage(undefined), { message: /no data/ })
+  t.throws(() => movingLeastSquares(), { message: /no data/ })
+  t.throws(() => movingLeastSquares(undefined), { message: /no data/ })
+})

@@ -34,6 +34,17 @@ test('missing point is filled in', t => {
   t.deepEqual(sq, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
 })
 
+test('impulse function is smoothed', t => {
+  const raw = [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
+
+  const ma = movingAverage(raw)
+  const sq = movingLeastSquares(raw)
+
+  const expected = [0, 0, 0, 0, 0.2, 0.2, 0.2, 0.2, 0.2, 0, 0, 0, 0]
+  t.deepEqual(ma, expected.slice(2, -2))
+  t.deepEqual(quantize(sq), expected)
+})
+
 test('step function is smoothed', t => {
   const raw = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2]
 

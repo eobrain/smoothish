@@ -57,7 +57,7 @@ test('impulse function is smoothed', t => {
     20,
     20, 20, 0, 0, 0, 0]
   t.deepEqual(ma, expected.slice(2, -2))
-  t.deepEqual(quantize(sq), expected)
+  t.deepEqual(sq, expected)
 })
 
 test('step function is smoothed', t => {

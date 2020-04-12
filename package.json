@@ -4,11 +4,15 @@
   "description": "Smooth bad-quality time series data.",
   "main": "index.js",
   "scripts": {
-    "test": "bajel test"
+    "test": "ava"
   },
   "keywords": [
     "data"
   ],
   "author": "Eamonn O'Brien-Strain",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "ava": "^3.6.0",
+    "chai": "^4.2.0"
+  }
 }

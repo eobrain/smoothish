@@ -1,0 +1,14 @@
+{
+  "name": "smoothish",
+  "version": "0.0.1",
+  "description": "Smooth bad-quality time series data.",
+  "main": "index.js",
+  "scripts": {
+    "test": "bajel test"
+  },
+  "keywords": [
+    "data"
+  ],
+  "author": "Eamonn O'Brien-Strain",
+  "license": "ISC"
+}

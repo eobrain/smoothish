@@ -25,44 +25,63 @@ test('straight line', t => {
 })
 
 test('missing point is filled in', t => {
-  const raw = [1, 2, 3, 4, 5, undefined, 7, 8, 9, 10, 11, 12]
+  const raw = [
+    100, 200, 300, 400, 500,
+    undefined,
+    700, 800, 900, 1000, 1100, 1200]
 
   const ma = movingAverage(raw)
   const sq = movingLeastSquares(raw)
 
-  t.deepEqual(ma, [3, 3.5, 4.75, 6, 7.25, 8.5, 9, 10])
-  t.deepEqual(sq, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+  t.deepEqual(ma, [
+    300, 350, 475,
+    600,
+    725, 850, 900, 1000])
+  t.deepEqual(sq, [
+    100, 200, 300, 400, 500,
+    600,
+    700, 800, 900, 1000, 1100, 1200])
 })
 
 test('impulse function is smoothed', t => {
-  const raw = [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
+  const raw = [
+    0, 0, 0, 0, 0, 0,
+    100,
+    0, 0, 0, 0, 0, 0]
 
   const ma = movingAverage(raw)
   const sq = movingLeastSquares(raw)
 
-  const expected = [0, 0, 0, 0, 0.2, 0.2, 0.2, 0.2, 0.2, 0, 0, 0, 0]
+  const expected = [
+    0, 0, 0, 0, 20, 20,
+    20,
+    20, 20, 0, 0, 0, 0]
   t.deepEqual(ma, expected.slice(2, -2))
   t.deepEqual(quantize(sq), expected)
 })
 
 test('step function is smoothed', t => {
-  const raw = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2]
+  const raw = [
+    100, 100, 100, 100, 100, 100,
+    200, 200, 200, 200, 200, 200]
 
   const ma = movingAverage(raw)
   const sq = movingLeastSquares(raw)
 
-  const expected = [1, 1, 1, 1, 1.2, 1.4, 1.6, 1.8, 2, 2, 2, 2]
+  const expected = [
+    100, 100, 100, 100, 120, 140,
+    160, 180, 200, 200, 200, 200]
   t.deepEqual(ma, expected.slice(2, -2))
   t.deepEqual(quantize(sq), expected)
 })
 
 test('zeros are handled correctly', t => {
-  const raw = [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1]
+  const raw = [0, 0, 0, 0, 0, 0, 100, 100, 100, 100, 100, 100]
 
   const ma = movingAverage(raw)
   const sq = movingLeastSquares(raw)
 
-  const expected = [0, 0, 0, 0, 0.2, 0.4, 0.6, 0.8, 1, 1, 1, 1]
+  const expected = [0, 0, 0, 0, 20, 40, 60, 80, 100, 100, 100, 100]
   t.deepEqual(ma, expected.slice(2, -2))
   t.deepEqual(quantize(sq), expected)
 })

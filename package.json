@@ -6,15 +6,18 @@
   "scripts": {
     "test": "ava"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eobrain/smoothish.git"
+  },
   "keywords": [
-    "data"
+    "data", "smooth", "moving average"
   ],
   "author": "Eamonn O'Brien-Strain",
-  "license": "ISC",
+  "license": "EPL-2.0",
   "devDependencies": {
     "ava": "^3.6.0",
     "bajel": "^0.3.7",
-    "chai": "^4.2.0",
     "jsdoc-to-markdown": "^5.0.3"
   }
 }

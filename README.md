@@ -162,10 +162,10 @@ print(fullSmooth(stepFunction, 2))
 ```
 
 ![spark](https://quickchart.io/chart?h=32&w=100&c={type:%27sparkline%27,data:{datasets:[{data:[100,100,100,120,140,160,180,200,200,200]}]}})
-```js
 
 And a radius of 3 extends the smoothing even further, over seven points.
 
+```js
 print(fullSmooth(stepFunction, 3))
 // --> [ 100, 100, 110, 129, 143, 157, 171, 190, 200, 200 ]
 ```

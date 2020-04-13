@@ -1,0 +1,12 @@
+[all]
+deps=["test", "api.md"]
+
+[test]
+exec="ava"
+
+["api.md"]
+deps=["index.js"]
+exec="jsdoc2md $< >$@"
+
+[example]
+exec="node example.js"

@@ -34,9 +34,9 @@ const movingAverage = (data, radius = 2) => {
   return smoothed
 }
 
-const leastSquares = (smoothed, radius, x0) => {
+const leastSquares = (data, radius, x0) => {
   if (radius === 0) {
-    return smoothed[x0]
+    return data[x0]
   }
   // See https://www.mathsisfun.com/data/least-squares-regression.html
   let N = 0
@@ -44,16 +44,27 @@ const leastSquares = (smoothed, radius, x0) => {
   let sumX = 0
   let sumY = 0
   let sumXsq = 0
+  let beyondLeftEdge = true
+  let beyondRightEdge = true
   for (let x = x0 - radius; x <= x0 + radius; ++x) {
-    const y = smoothed[x]
+    const y = data[x]
     if (y === null || y === undefined) {
       continue
+    }
+    if (x <= x0) {
+      beyondLeftEdge = false
+    }
+    if (x >= x0) {
+      beyondRightEdge = false
     }
     ++N
     sumXY += x * y
     sumX += x
     sumY += y
     sumXsq += x * x
+  }
+  if (beyondLeftEdge || beyondRightEdge) {
+    return null
   }
   const m = (N * sumXY - sumX * sumY) / (N * sumXsq - sumX * sumX)
   const b = (sumY - m * sumX) / N

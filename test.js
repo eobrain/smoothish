@@ -24,6 +24,14 @@ test('straight line', t => {
   t.deepEqual(sq, raw)
 })
 
+test('points beyond edge ignored', t => {
+  const raw = [null, 2, 3, 4, 5, 6, 7, 8, 9, 10, null, null, null, null, null]
+
+  const sq = fullSmooth(raw)
+
+  t.deepEqual(sq, raw)
+})
+
 test('missing point is filled in', t => {
   const raw = [
     100, 200, 300, 400, 500,

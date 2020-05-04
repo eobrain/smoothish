@@ -1,6 +1,6 @@
 {
   "name": "smoothish",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Smooth bad-quality time series data.",
   "main": "index.js",
   "scripts": {

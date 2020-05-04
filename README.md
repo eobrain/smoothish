@@ -130,7 +130,7 @@ By default "neighboring points" are all points, but with the ones closer having 
 
 ## Using different algorithms and falloffs
 
-As an alternative to the least-squares based smoothing, you can have `smoothish` the moving-average smoothing by adding a `algorithm: 'movingAverage'` property to the optional second parameter.
+As an alternative to the least-squares based smoothing, you can have `smoothish` do moving-average smoothing by adding a `algorithm: 'movingAverage'` property to the optional second parameter.
 
 And as an alternative to the exponential falloff you can set `falloff: 'step'` to include only the points within `radius` and to have them equally weighted.
 

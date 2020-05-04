@@ -10,17 +10,13 @@ const OPTIONS = [
   { algorithm: 'movingAverage', falloff: 'step' },
   { },
   { algorithm: 'movingAverage' }
-  // { radius: 4, falloff: 'step' },
-  // { radius: 4, algorithm: 'movingAverage', falloff: 'step' },
-  // { radius: 4 },
-  // { radius: 4, algorithm: 'movingAverage' }
 ]
 
 // const tee = x => {
 //  console.log(x)
 //  return x
 // }
-const max = xs => xs.reduce((acc, x) => missing(x) ? acc : Math.max(acc, x))
+const max = xs => xs.reduce((acc, x) => missing(x) || missing(acc) ? acc : Math.max(acc, x), -Infinity)
 const bar = n => [...Array(Math.max(0, Math.round(n)))].map(() => '#').join('')
 
 const bars = xs => quantize(xs).map(x => (missing(x) ? '' : bar(x * 50 / max(xs))) + ' ' + x)
@@ -80,6 +76,27 @@ test('points beyond edge ignored', t => {
     const actual = smoothish(raw, OPTIONS[i])
 
     t.deepEqual(actual, expected[i])
+  }
+
+  t.snapshot(bars(raw), 'input')
+  for (const options of OPTIONS) {
+    const actual = smoothish(raw, options)
+    t.snapshot(bars(actual), JSON.stringify(options))
+  }
+})
+
+test('points beyond edge ignored (2)', t => {
+  const raw = [undefined, 200, 300, undefined, 500, undefined, 700, 800, 900]
+
+  const expected = [
+    [undefined, 200, 300, 400, 500, 600, 700, 800, 900],
+    [undefined, 250, 333.333, 333.333, 500, 666.667, 725, 800, 800]
+  ]
+
+  for (const i in expected) {
+    const actual = smoothish(raw, OPTIONS[i])
+
+    t.deepEqual(quantize(actual), expected[i], JSON.stringify(OPTIONS[i]))
   }
 
   t.snapshot(bars(raw), 'input')

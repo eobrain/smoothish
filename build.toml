@@ -2,11 +2,11 @@
 deps=["test", "api.md"]
 
 [test]
-exec="deno test test/test.js"
+exec="tools/deno test test/test.js"
 
 ["api.md"]
 deps=["index.js"]
 exec="jsdoc2md $< >$@"
 
 [example]
-exec="node example.js"
+exec="tools/deno run example.js"

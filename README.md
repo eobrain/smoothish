@@ -6,7 +6,7 @@ robust to missing data and don't drop points at the beginning and end boundary.
 ## import
 
 ```js
-import smoothish from 'https://raw.githubusercontent.com/eobrain/smoothish/deno/index.js'
+import smoothish from 'https://cdn.jsdelivr.net/gh/eobrain/smoothish@deno/index.js'
 ```
 
 ## Basic Usage

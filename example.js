@@ -1,5 +1,5 @@
 // import smoothish from 'https://deno.land/x/smoothish@deno/index.js'
-import smoothish from 'https://raw.githubusercontent.com/eobrain/smoothish/deno/index.js'
+import smoothish from 'https://cdn.jsdelivr.net/gh/eobrain/smoothish@deno/index.js'
 import { sprintf } from 'https://deno.land/std/fmt/sprintf.ts'
 
 const format = x => x === undefined || x === null ? `${x}` : sprintf('%3.2d', x)

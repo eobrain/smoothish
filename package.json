@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Smooth bad-quality time series data.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "ava"
+    "test": "bajel test"
   },
   "repository": {
     "type": "git",

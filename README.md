@@ -3,21 +3,7 @@
 The Smoothish JavaScript library provides variations of centered moving average functions that are
 robust to missing data and don't drop points at the beginning and end boundary.
 
-## Installation and import
-
-Installation:
-
-```sh
-npm install smoothish
-```
-
-Import (classic):
-
-```js
-const smoothish = require('smoothish')
-```
-
-or (modern):
+## import
 
 ```js
 import smoothish from 'smoothish'

@@ -233,4 +233,4 @@ const smoothish = (data, { radius = 2, algorithm = 'leastSquares', falloff = 'ex
   return func(data, radius)
 }
 
-module.exports = smoothish
+export default smoothish

@@ -1,11 +1,7 @@
-const smoothish = require('./index.js')
+import smoothish from 'https://deno.land/x/smoothish@deno/index.js'
+import { sprintf } from 'https://deno.land/std/fmt/sprintf.ts'
 
-const formatter = Intl.NumberFormat(undefined, {
-  minimumSignificantDigits: 3,
-  maximumSignificantDigits: 3
-})
-
-const format = x => x === undefined || x === null ? `${x}` : formatter.format(x)
+const format = x => x === undefined || x === null ? `${x}` : sprintf('%3.2d', x)
 
 // print an array of numbers
 const print = (name, xs) => {

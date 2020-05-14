@@ -2,7 +2,7 @@
 deps=["test", "api.md"]
 
 [test]
-exec="ava"
+exec="deno test test/test.js"
 
 ["api.md"]
 deps=["index.js"]

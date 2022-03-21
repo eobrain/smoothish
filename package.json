@@ -11,7 +11,9 @@
     "url": "git+https://github.com/eobrain/smoothish.git"
   },
   "keywords": [
-    "data", "smooth", "moving average"
+    "data",
+    "smooth",
+    "moving average"
   ],
   "author": "Eamonn O'Brien-Strain",
   "license": "EPL-2.0",

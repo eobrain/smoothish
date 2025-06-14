@@ -122,7 +122,7 @@ const radius3 = smoothish(stepFunction, { radius: 3 })
 
 ## The Least-Squares algorithm
 
-Bu default `smoothish` uses a a least-squares linear interpolation for each point using the values of neighboring points, and replaces each point with the interpolated point.
+By default `smoothish` uses a least-squares linear interpolation for each point using the values of neighboring points, and replaces each point with the interpolated point.
 
 ## Exponential falloff
 

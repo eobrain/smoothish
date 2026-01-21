@@ -18,7 +18,7 @@
   "author": "Eamonn O'Brien-Strain",
   "license": "EPL-2.0",
   "devDependencies": {
-    "ava": "^3.6.0",
+    "ava": "^5.2.0",
     "bajel": "^0.3.7",
     "jsdoc-to-markdown": "^5.0.3"
   }
